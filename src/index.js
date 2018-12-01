@@ -1,13 +1,19 @@
-const express=require('express')
-const app=express();
-const Home=require('./containers/Home')
+import express from 'express'
+import Home from './containers/Home'
+import React from 'react'
+import {renderToString} from 'react-dom/server'
 
+const app=express();
+const content=renderToString(<Home/>)
 app.get('/',function(req,res){
-  res.send(`
-  <html>
-  <h1>hello</h1>
-  </html>`
-  );
+  res.send(
+  `<html>
+  <head><title>SSR</title></head>
+  <body>
+    ${content}
+  </body>
+  </html>
+  `);
 });
 
 var server=app.listen(3000);
