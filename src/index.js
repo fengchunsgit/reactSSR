@@ -8,7 +8,7 @@ const content=renderToString(<Home/>)
 app.get('/',function(req,res){
   res.send(
   `<html>
-  <head><title>SSR</title></head>
+  <head><title>SS0R</title></head>
   <body>
     ${content}
   </body>
