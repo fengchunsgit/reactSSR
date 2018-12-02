@@ -94,7 +94,7 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Home = function Home() {\n  return _react2.default.createElement(\n    'div',\n    null,\n    'hello,ssr\\u3002leee'\n  );\n};\n\nexports.default = Home;\n\n//# sourceURL=webpack:///./src/containers/Home/index.js?");
+eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Home = function Home() {\n  return _react2.default.createElement(\n    'div',\n    null,\n    _react2.default.createElement(\n      'div',\n      null,\n      'this is ssr'\n    ),\n    _react2.default.createElement(\n      'button',\n      { onClick: function onClick() {\n          alert('clicked!');\n        } },\n      'click'\n    )\n  );\n};\n\nexports.default = Home;\n\n//# sourceURL=webpack:///./src/containers/Home/index.js?");
 
 /***/ }),
 
@@ -106,7 +106,7 @@ eval("\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-eval("\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _Home = __webpack_require__(/*! ./containers/Home */ \"./src/containers/Home/index.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _server = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar app = (0, _express2.default)();\nvar content = (0, _server.renderToString)(_react2.default.createElement(_Home2.default, null));\napp.get('/', function (req, res) {\n  res.send('<html>\\n  <head><title>SS0R</title></head>\\n  <body>\\n    ' + content + '\\n  </body>\\n  </html>\\n  ');\n});\n\nvar server = app.listen(3000);\n\n//# sourceURL=webpack:///./src/index.js?");
+eval("\n\nvar _express = __webpack_require__(/*! express */ \"express\");\n\nvar _express2 = _interopRequireDefault(_express);\n\nvar _Home = __webpack_require__(/*! ./containers/Home */ \"./src/containers/Home/index.js\");\n\nvar _Home2 = _interopRequireDefault(_Home);\n\nvar _react = __webpack_require__(/*! react */ \"react\");\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _server = __webpack_require__(/*! react-dom/server */ \"react-dom/server\");\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar app = (0, _express2.default)();\napp.use(_express2.default.static('public'));\nvar content = (0, _server.renderToString)(_react2.default.createElement(_Home2.default, null));\napp.get('/', function (req, res) {\n  res.send('<html>\\n  <head><title>SS0R</title></head>\\n  <body>\\n  <div id=\\'root\\'>' + content + '</div>\\n    \\n    <script src=\"./index.js\"></script>\\n  </body>\\n  </html>\\n  ');\n});\n\nvar server = app.listen(3000);\n\n//# sourceURL=webpack:///./src/index.js?");
 
 /***/ }),
 
