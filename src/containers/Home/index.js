@@ -1,21 +1,39 @@
-import React from 'react'
+import React,{Component} from 'react'
 import Header from '../../components/Header'
 import {connect} from 'react-redux'
+import {getHomeList} from './store/actions'
 
-const Home=(props)=>{
-  return (
-    <div>
-      <Header/>
-      <div>this is {props.name}</div>
-      <button onClick={()=>{alert('clicked!')}}>click</button>
-    </div>
-    
-  )
+class Home extends Component{
+
+  getList(){
+    const {list} =this.props;
+    return list.map(item=><div key={item.id}>{item.title}</div>)
+  }
+
+  render(){
+    console.log(this.props.list);
+      return (
+      <div>
+        <Header/>
+        {this.getList()}
+        <button onClick={()=>{alert('clicked!')}}>click</button>
+      </div>
+    )
+  }
+
+  componentDidMount(){
+    this.props.getHomeList();
+  }
 }
 
-
 const mapStateToProps=state=>({
-  name:state.name
+  list:state.home.newsList
 })
 
-export default connect(mapStateToProps,null)(Home)
+const mapDispatchToProps=dispatch=>({
+  getHomeList(){
+    dispatch(getHomeList())
+  }
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home)
