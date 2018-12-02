@@ -5,11 +5,21 @@ import {BrowserRouter} from 'react-router-dom'
 import Routes from '../Routes'
 // ReactDom.render(<Home/>,document.getElementById('root'))
 
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
+const reducer=(state={name:'lee'},action)=>{
+  return state
+}
+const store =createStore(reducer)
+
 const App=()=>{
   return (
-    <BrowserRouter>
-      {Routes}
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        {Routes}
+      </BrowserRouter>
+    </Provider>
   )
 }
 
