@@ -3,15 +3,14 @@ import ReactDom from 'react-dom'
 import Home from '../containers/Home'
 import {BrowserRouter} from 'react-router-dom'
 import Routes from '../Routes'
-// ReactDom.render(<Home/>,document.getElementById('root'))
-
-import {createStore} from 'redux'
+import {createStore,applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
+import thunk from 'redux-thunk'
 
 const reducer=(state={name:'lee'},action)=>{
   return state
 }
-const store =createStore(reducer)
+const store =createStore(reducer,applyMiddleware(thunk))
 
 const App=()=>{
   return (
