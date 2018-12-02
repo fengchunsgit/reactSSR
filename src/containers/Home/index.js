@@ -11,7 +11,6 @@ class Home extends Component{
   }
 
   render(){
-    console.log(this.props.list);
       return (
       <div>
         <Header/>
@@ -24,6 +23,10 @@ class Home extends Component{
   componentDidMount(){
     this.props.getHomeList();
   }
+}
+
+Home.loadData=()=>{
+  //负责在服务端渲染之前，把数据提前加载好
 }
 
 const mapStateToProps=state=>({

@@ -1,15 +1,28 @@
 import {renderToString} from 'react-dom/server'
-import {StaticRouter} from 'react-router-dom'
-import Routes from '../Routes'
+import {StaticRouter,Route,matchPath} from 'react-router-dom'
+import routes from '../Routes'
 import React from 'react'
 import {Provider} from 'react-redux'
 import getStore from '../store'
+import {matchRoutes} from 'react-router-config'
 
 export const render=(req)=>{
+  const store=getStore()
+  const matchedRoutes=matchRoutes(routes,req.path)
+  //这里拿到异步数据，填充到store
+  //store里面填什么，需要结合用户请求地址和路由做判断
+  //如果访问 /
+  //如果访问/login
+  //根据路由的路径，来往store加数据
+  
   const content=renderToString((
-    <Provider store={getStore()}>
+    <Provider store={store}>
       <StaticRouter location={req.path} context={{}}>
-        {Routes}
+        <div>
+        {routes.map(route=>(
+          <Route {...route}/>
+        ))}
+        </div>
       </StaticRouter>
     </Provider>
   ))
