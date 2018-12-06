@@ -16,22 +16,22 @@ app.use('/api',proxy('http://localhost:8887', {
 
 app.get('*',function(req,res){
   const store=getStore()
-  // const matchedRoutes=matchRoutes(routes,req.path)
+  const matchedRoutes=matchRoutes(routes,req.path)
   // //这里拿到异步数据，填充到store
   // //store里面填什么，需要结合用户请求地址和路由做判断
   // //如果访问 /
   // //如果访问/login
   // //根据路由的路径，来往store加数据
-  // const promises=[]
-  // matchedRoutes.forEach(item=>{
-  //   if(item.route.loadData){
-  //     promises.push(item.route.loadData(store))
-  //   }
-  // })
+  const promises=[]
+  matchedRoutes.forEach(item=>{
+    if(item.route.loadData){
+      promises.push(item.route.loadData(store))
+    }
+  })
 
-  // Promise.all(promises).then(()=>{
+  Promise.all(promises).then(()=>{
     res.send(render(store,routes,req))
-  // })
+  })
 });
 
 var server=app.listen(3000);
