@@ -1,15 +1,11 @@
-import axios from 'axios'
 import {CHANGE_LIST} from './constants'
-import clientAxios from '../../../client/request'
-import serverAxios from '../../../server/request'
-
 
 const changeList=(list)=>({
   type:CHANGE_LIST,
   list
 })
 
-export const getHomeList=(server)=>{
+export const getHomeList=()=>{
 
   // http://localhost:8887/api/news.json
   //浏览器运行
@@ -18,9 +14,8 @@ export const getHomeList=(server)=>{
   // /api/news.json=服务器根目录下/api/news.json
 
   let url='/api/news.json'
-  const request = server ? serverAxios : clientAxios
-  return (dispatch)=>{
-    return request.get(url)
+  return (dispatch,getState,axiosInstance)=>{
+    return axiosInstance.get(url)
     .then((res)=>{
       const list=res.data.data;
       dispatch(changeList(list))
