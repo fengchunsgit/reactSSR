@@ -9,9 +9,9 @@ const reducer =combineReducers({
   home:homeReducer,
   header:headerReducer
 })
-export const getStore=()=>{
+export const getStore=(req)=>{
   //改变服务器端store，那么一定要使用serverAxios
-  return createStore(reducer,applyMiddleware(thunk.withExtraArgument(serverAxios)))
+  return createStore(reducer,applyMiddleware(thunk.withExtraArgument(serverAxios(req))))
 }
 
 export const getClientStore=()=>{

@@ -15,7 +15,7 @@ app.use('/api',proxy('http://localhost:8887', {
 }));
 
 app.get('*',function(req,res){
-  const store=getStore()
+  const store=getStore(req)
   const matchedRoutes=matchRoutes(routes,req.path)
   // //这里拿到异步数据，填充到store
   // //store里面填什么，需要结合用户请求地址和路由做判断
