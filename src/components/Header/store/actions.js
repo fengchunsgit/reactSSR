@@ -17,3 +17,25 @@ export const getHeaderInfo=()=>{
     });
   }
 }
+
+export const login=()=>{
+
+  let url='/api/login.json'
+  return (dispatch,getState,axiosInstance)=>{
+    return axiosInstance.get(url)
+    .then((res)=>{
+      dispatch(changeLogin(res.data.data.login))
+    });
+  }
+}
+
+export const logout=()=>{
+
+  let url='/api/logout.json'
+  return (dispatch,getState,axiosInstance)=>{
+    return axiosInstance.get(url)
+    .then((res)=>{
+      dispatch(changeLogin(res.data.data.login))
+    });
+  }
+}
